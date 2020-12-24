@@ -10,19 +10,19 @@ If I have given you the `data.json` file, put it in `./data`. Then run `yarn sta
 generate the prefix file and name list.
 
 ```bash
-yarn start
+yarn run build
 ```
 
 ### Data files
 
 If I have not given you the `data.json` file (permissions stuff, sorry), you
-can write your own using the following structure:
+can write your own by putting an arbitrary number of strings into a top-level JSON array, e.g.:
 
 ```json
 [
-  {
-    "race": "x",
-    "given": ["name", "name2"]
-  }
+  "John",
+  "Paul",
+  "George",
+  "Ringo"
 ]
 ```

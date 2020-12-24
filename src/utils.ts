@@ -28,14 +28,14 @@ export function getBestSubstring(hash: Record<string, number>): string | null {
  * Merge a prefix/suffix pair, smoothing over any weirdnesses that might crop
  * up in the middle.
  */
-export function joinIxes(prefix: string, suffix: string) {
+export function joinIxes(prefix: string, suffix: string): string {
   return (
     [prefix, suffix]
       .join('')
       // conjoining vowels
-      .replace(/(?:a|e|o){2}/, s => s[1])
+      .replace(/(?:a|e|o){2}/gi, s => s[1])
       // eh/uh/oh/ah all look a little weird
-      .replace(/(a|e|o|u)h/, s => s[0])
+      .replace(/(a|e|o|u)h/gi, s => s[0])
   );
 }
 
@@ -44,4 +44,26 @@ export function joinIxes(prefix: string, suffix: string) {
  */
 export function reverse(str: string): string {
   return Array.from(str).reverse().join('');
+}
+
+// sort the list, uppercase the first letter of each
+export function cleanup(names: string[]): string[] {
+  return names
+    .sort((a, b) => a.localeCompare(b))
+    .map(word => word[0].toUpperCase() + word.slice(1));
+}
+
+interface LegacyItem {
+  race: string;
+  given: string[];
+}
+
+export function isLegacyData(
+  data: string[] | LegacyItem[]
+): data is LegacyItem[] {
+  return typeof data[0] !== 'string';
+}
+
+export function mungeLegacyData(data: LegacyItem[]): string[] {
+  return data.reduce((a: string[], b) => a.concat(b.given), []);
 }
