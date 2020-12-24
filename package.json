@@ -13,6 +13,6 @@
   "scripts": {
     "ixes": "ts-node ./src/generate/ixes.ts",
     "names": "ts-node ./src/generate/names.ts",
-    "start": "yarn run ixes && yarn run names"
+    "build": "yarn run ixes && yarn run names"
   }
 }

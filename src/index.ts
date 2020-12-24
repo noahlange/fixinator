@@ -1,10 +1,5 @@
 import { withMinCount, getBestSubstring, reverse } from './utils';
 
-interface Output {
-  prefixes: string[];
-  suffixes: string[];
-}
-
 interface IxResult {
   text: string;
   count: number;
@@ -54,10 +49,8 @@ function getIxes(names: string[], name: string): IxResult | null {
 /**
  * Given a list of names, pick out the most common prefixes.
  */
-export function getNameIxes(names: string[]): Output {
+export function getPrefixes(names: string[]): string[] {
   const namesToPrefix = names.map(s => s.toLowerCase());
-  const namesToSuffix = names.map(s => reverse(s.toLowerCase()));
-
   const prefixes: Record<string, number> = {};
   for (const name of namesToPrefix) {
     const prefix = getIxes(namesToPrefix, name);
@@ -66,18 +59,9 @@ export function getNameIxes(names: string[]): Output {
       prefixes[text] = (prefixes[text] ?? 0) + count;
     }
   }
+  return withMinCount(prefixes, MIN_COUNT);
+}
 
-  const suffixes: Record<string, number> = {};
-  for (const name of namesToSuffix) {
-    const suffix = getIxes(namesToSuffix, reverse(name));
-    if (suffix) {
-      const { text, count } = suffix;
-      suffixes[text] = (suffixes[text] ?? 0) + count;
-    }
-  }
-
-  return {
-    prefixes: withMinCount(prefixes, MIN_COUNT),
-    suffixes: withMinCount(suffixes, MIN_COUNT)
-  };
+export function getSuffixes(names: string[]): string[] {
+  return getPrefixes(names.map(reverse)).map(reverse);
 }

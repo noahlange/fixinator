@@ -22,10 +22,7 @@ can write your own using the following structure:
 [
   {
     "race": "x",
-    "given": [
-      "name",
-      "name2"
-    ]
+    "given": ["name", "name2"]
   }
 ]
 ```
