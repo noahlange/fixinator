@@ -8,7 +8,7 @@ interface PrefixResult {
 const MIN_COUNT: number = 2;
 
 /**
- * This is possibly the least efficient implementation possible.
+ * This is likely the least efficient implementation possible.
  */
 function prefixify(names: string[], name: string): PrefixResult | null {
   const prefixes: Record<string, number> = {};
