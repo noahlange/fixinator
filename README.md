@@ -18,12 +18,13 @@ yarn start
 If I have not given you the `data.json` file (permissions stuff, sorry), you
 can write your own using the following structure:
 
-```
+```json
 [
   {
     "race": "x",
     "given": [
-      "name
+      "name",
+      "name2"
     ]
   }
 ]
